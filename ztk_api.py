@@ -82,7 +82,8 @@ class MaLongHandler(tornado.web.RequestHandler):
         goods_info['box']['x'], goods_info['box']['y'], goods_info['box']['w'], goods_info['box']['h'] = res['loc']
         for good in res['results']:
             goods_info['good_list'].append(
-                {'good_url': good['buy_url'], 'showimage': 'http://assets1.styleai.cn/img-shopping/' + good['pic_uid']})
+                {'good_url': good['buy_url'],
+                 'showimage': 'http://assets1.styleai.cn/img-shopping/' + good['pic_uid'] + '.jpg'})
         format_res['match'].append(goods_info)
         return {'status': 0, 'data': [format_res, res]}
 
@@ -256,5 +257,5 @@ def push_img(pic_url):
 
 if __name__ == "__main__":
     app = make_app()
-    app.listen(8888)
+    app.listen(9876)
     tornado.ioloop.IOLoop.current().start()
