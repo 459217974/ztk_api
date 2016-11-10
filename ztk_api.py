@@ -18,6 +18,7 @@ import struct
 from cStringIO import StringIO
 import xmltodict
 import traceback
+import base64
 
 r = r'g_page_config = (.*);[\s\S]*g_srp_loadCss'
 r2 = r'"tfsid":"(.*?)"'
@@ -159,8 +160,39 @@ class KalavaHandler(tornado.web.RequestHandler):
         for detect in res['data']['detect']:
             match = {'good_list': [], 'box': detect['box']}
             for good in detect['child']['match']:
-                match['good_list'].append({'good_url': good['name'].split('_')[0], 'showimage': good['showimage']})
+                match['good_list'].append({'good_url': good['name'], 'showimage': good['showimage']})
             format_res['match'].append(match)
+        return {'status': 0, 'data': [format_res, res]}
+
+
+class SensetimeHandler(tornado.web.RequestHandler):
+    def get(self):
+        imglink = self.get_argument('imglink')
+        res, imgfile = self.sensetime_search(imglink)
+        self.write(json.dumps(self.format_res(res, imgfile), ensure_ascii=False))
+
+    def sensetime_search(self, imglink):
+        url = 'http://fashion.sensetime.com/fashion/search_clothes'
+        imgfile = requests.get(imglink).content
+        base64Pic = base64.b64encode(imgfile)
+        args = {'base64Pic': base64Pic}
+        req = requests.post(url, data=args)
+        return req.json(), imgfile
+
+    def format_res(self, res, imgfile):
+        if 'result' not in res or res['result'] != 'success':
+            return {'status': -1, 'errmsg': res}
+        format_res = push_img('', imgfile)
+        format_res['match'] = []
+        match = {'good_list': [],
+                 'box': {'x': res['sResult']['left'], 'y': res['sResult']['top'],
+                         'w': res['sResult']['right'] - res['sResult']['left'],
+                         'h': res['sResult']['bottom'] - res['sResult']['top']}}
+        # http://fashion.sensetime.com/thumbnail/f/24/537de24aNd5078324.jpg
+        for good in res['dataList']:
+            match['good_list'].append(
+                {'good_url': good['url'], 'showimage': 'http://fashion.sensetime.com/' + good['showimage']})
+        format_res['match'].append(match)
         return {'status': 0, 'data': [format_res, res]}
 
 
@@ -170,6 +202,7 @@ def make_app():
         (r"/malong/detect", MaLong_detectHandler),
         (r"/taobao", TaoBaoHandler),
         (r"/kalava", KalavaHandler),
+        (r"/sensetime", SensetimeHandler),
     ])
 
 
@@ -215,13 +248,16 @@ def resizeImg(**args):
     return img
 
 
-def push_img(pic_url):
+def push_img(pic_url, pic_file=''):
     HOST = '192.168.1.91'
     PORT = 8090
     ADDR = (HOST, PORT)
     try:
         tag = None
-        pic = requests.get(pic_url).content
+        if pic_file:
+            pic = pic_file
+        else:
+            pic = requests.get(pic_url).content
         if len(pic) > 1048000:
             tag = True
             print 'resize img', len(pic)
