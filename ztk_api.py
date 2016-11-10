@@ -127,9 +127,14 @@ class TaoBaoHandler(tornado.web.RequestHandler):
         tfsid = re.findall(reg2, content)[0]
         format_res = {'match': [], 'tfsid': tfsid}
         goods_info = {'box': {}, 'good_list': []}
-        goods_info['box']['x'], goods_info['box']['y'], goods_info['box']['w'], goods_info['box']['h'] = region
         if imglink:
             format_res.update(push_img(imglink))
+            img_w, img_h = format_res['imgsize'].split('*')
+            x, w, y, h = region
+            goods_info['box']['x'] = float(x) / float(img_w)
+            goods_info['box']['y'] = float(y) / float(img_h)
+            goods_info['box']['w'] = float(int(w) - int(x)) / float(img_w)
+            goods_info['box']['h'] = float(int(h) - int(y)) / float(img_h)
         for good in goods_list:
             goods_info['good_list'].append(
                 {'good_url': 'http:' + good['detail_url'], 'showimage': 'http:' + good['pic_url']})
@@ -158,10 +163,11 @@ class KalavaHandler(tornado.web.RequestHandler):
         format_res = push_img(imglink)
         format_res['match'] = []
         for detect in res['data']['detect']:
-            match = {'good_list': [], 'box': detect['box']}
-            for good in detect['child']['match']:
-                match['good_list'].append({'good_url': good['name'], 'showimage': good['showimage']})
-            format_res['match'].append(match)
+            if 'child' in detect:
+                match = {'good_list': [], 'box': detect['box']}
+                for good in detect['child']['match']:
+                    match['good_list'].append({'good_url': good['name'], 'showimage': good['showimage']})
+                format_res['match'].append(match)
         return {'status': 0, 'data': [format_res, res]}
 
 
@@ -184,14 +190,16 @@ class SensetimeHandler(tornado.web.RequestHandler):
             return {'status': -1, 'errmsg': res}
         format_res = push_img('', imgfile)
         format_res['match'] = []
+        img_w, img_h = format_res['imgsize'].split('*')
         match = {'good_list': [],
-                 'box': {'x': res['sResult']['left'], 'y': res['sResult']['top'],
-                         'w': res['sResult']['right'] - res['sResult']['left'],
-                         'h': res['sResult']['bottom'] - res['sResult']['top']}}
+                 'box': {'x': float(res['sResult']['left']) / float(img_w),
+                         'y': float(res['sResult']['top']) / float(img_h),
+                         'w': float(res['sResult']['right'] - res['sResult']['left']) / float(img_w),
+                         'h': float(res['sResult']['bottom'] - res['sResult']['top']) / float(img_h)}}
         # http://fashion.sensetime.com/thumbnail/f/24/537de24aNd5078324.jpg
         for good in res['dataList']:
             match['good_list'].append(
-                {'good_url': good['url'], 'showimage': 'http://fashion.sensetime.com/' + good['showimage']})
+                {'good_url': good['url'], 'showimage': 'http://fashion.sensetime.com/' + good['thumbnail']})
         format_res['match'].append(match)
         return {'status': 0, 'data': [format_res, res]}
 
