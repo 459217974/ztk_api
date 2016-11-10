@@ -1,13 +1,5 @@
 # 找同款API说明
 
-### 接口基础信息
-
-* 服务器：192.168.1.123
-* 端口：9876
-* 示例URL：http://192.168.1.123:9876/kalava?imglink=http://pic.adkalava.com/img005/989/99a24c99c7783a5d.jpg
-
-具体各功能地址见下方具体描述
-
 ### MaLong
 
 * 检框接口
@@ -895,7 +887,7 @@
         args = {
         
             "tfsid":"TB1IOGSOXXXXXXEXVXXXXXXXXXX",
-            "region":"187,542,14,586"
+            "region":"187,542,14,586" //x, xmax, y, ymax
         }
     
     返回结果：
@@ -910,7 +902,12 @@
 		      "tfsid": "TB1IOGSOXXXXXXEXVXXXXXXXXXX", // 淘宝在第一次上传图片后，就将图片链接转为自己的图片链接，如果需要重新框选，需要使用这个淘宝的图片id
 		      "match": [ //为适用我们的接口返回多个匹配结果的情况，这是一个匹配结果的数组
 		        {
-		          "box": {"y": 0.0175, "x": 0.23375, "w": 0.44375, "h": 0.715},
+		          "box": {
+		            "y": "0.0175",
+		            "x": "0.23375",
+		            "w": "0.44375",
+		            "h": "0.715"
+		          },
 		          "good_list": [ // 匹配商品的列表
 		            {
 		              "showimage": "http://g-search3.alicdn.com/img/bao/uploaded/i4/TB2mdoNXR_xQeBjy0FhXXbAoFXa_!!2860759430.png",
@@ -4772,3 +4769,196 @@
 		    }
 		  ]
 		}
+		
+		
+### Sensetime
+
+* 找同款接口
+
+    URL：/sensetime?imglink=
+    
+    请求方式：GET
+    
+    返回结果：
+    
+        {
+              "status": 0,
+              "data": [
+                {
+                  "match": [
+                    {
+                      "box": {
+                        "y": 0.0,
+                        "x": 0.305,
+                        "w": 0.4075,
+                        "h": 0.9175
+                      },
+                      "good_list": [
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/12/5533ca70N348646e4.jpg",
+                          "good_url": "http://item.jd.com/1528659977.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/12/54374e5bN81f283fb.jpg",
+                          "good_url": "http://item.jd.com/1334386538.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/02/53dcb33eN86c22620.jpg",
+                          "good_url": "http://item.jd.com/1239217527.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/19/54f3d5f5N5c9d4f2e.jpg",
+                          "good_url": "http://item.jd.com/1472928325.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/07/5539b4a8Naa56f04d.jpg",
+                          "good_url": "http://item.jd.com/1248347578.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/15/554cb109N6a62f706.jpg",
+                          "good_url": "http://item.jd.com/1552697667.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/15/553902feN6c9cc2b2.jpg",
+                          "good_url": "http://item.jd.com/1534292215.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/12/552c6fbcN63a74f8a.jpg",
+                          "good_url": "http://item.jd.com/1492985263.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/12/5541b30bN1178881e.jpg",
+                          "good_url": "http://item.jd.com/1509287634.html"
+                        },
+                        {
+                          "showimage": "http://fashion.sensetime.com/thumbnail/f/01/54091e99N1353f9ba.jpg",
+                          "good_url": "http://item.jd.com/1288711774.html"
+                        }
+                      ]
+                    }
+                  ],
+                  "imgid": "11070495057390352989",
+                  "imgsize": "800*800",
+                  "imglink": "",
+                  "imgpath": "img005/989/99a24c99c7783a5d.jpg"
+                },
+                {
+                  "dataList": [
+                    {
+                      "uuid": 635975,
+                      "title": "福寿瓜 2015新款春夏女韩范学生宽松韩版简约中长款短袖印花T恤潮 黑色 S",
+                      "url": "http://item.jd.com/1528659977.html",
+                      "gender": "1",
+                      "price": 98.0,
+                      "thumbnail": "thumbnail/f/12/5533ca70N348646e4.jpg",
+                      "score": 0.99214655,
+                      "image": "images/f/12/5533ca70N348646e4.jpg"
+                    },
+                    {
+                      "uuid": 640553,
+                      "title": "美黛香2014秋冬新款亮片长袖打底裙 修身显瘦中长款连衣裙长袖T恤 蓝色 L",
+                      "url": "http://item.jd.com/1334386538.html",
+                      "gender": "1",
+                      "price": 98.0,
+                      "thumbnail": "thumbnail/f/12/54374e5bN81f283fb.jpg",
+                      "score": 1.0043119,
+                      "image": "images/f/12/54374e5bN81f283fb.jpg"
+                    },
+                    {
+                      "uuid": 130652,
+                      "title": "蒙丹娇绒 2014秋冬新款貂绒衫女圆领马头图案中长款百搭貂绒打底衫 艳蓝 S",
+                      "url": "http://item.jd.com/1239217527.html",
+                      "gender": "1",
+                      "price": 368.0,
+                      "thumbnail": "thumbnail/f/02/53dcb33eN86c22620.jpg",
+                      "score": 1.0077683,
+                      "image": "images/f/02/53dcb33eN86c22620.jpg"
+                    },
+                    {
+                      "uuid": 1010394,
+                      "title": "艾诗嘉连衣裙2015夏装新款修身性感中长款包臀裙一字领一步裙纯色七分袖露背长裙68055 黑色 S",
+                      "url": "http://item.jd.com/1472928325.html",
+                      "gender": "1",
+                      "price": 198.0,
+                      "thumbnail": "thumbnail/f/19/54f3d5f5N5c9d4f2e.jpg",
+                      "score": 1.015011,
+                      "image": "images/f/19/54f3d5f5N5c9d4f2e.jpg"
+                    },
+                    {
+                      "uuid": 404893,
+                      "title": "天韩依舍（ThYs）2015春夏装时尚高贵气质晚宴礼服长袖绣花改良旗袍7100 藏青色 XL",
+                      "url": "http://item.jd.com/1248347578.html",
+                      "gender": "1",
+                      "price": 176.0,
+                      "thumbnail": "thumbnail/f/07/5539b4a8Naa56f04d.jpg",
+                      "score": 1.0207753,
+                      "image": "images/f/07/5539b4a8Naa56f04d.jpg"
+                    },
+                    {
+                      "uuid": 799825,
+                      "title": "CLG2015夏装新款日韩版女装尖角灰色中长款背心马甲外套+修身显瘦休闲短裤淑女气质两件套 灰色 M 腰围70cm",
+                      "url": "http://item.jd.com/1552697667.html",
+                      "gender": "1",
+                      "price": 99.0,
+                      "thumbnail": "thumbnail/f/15/554cb109N6a62f706.jpg",
+                      "score": 1.0215633,
+                      "image": "images/f/15/554cb109N6a62f706.jpg"
+                    },
+                    {
+                      "uuid": 812413,
+                      "title": "花香娜2015夏季新款韩版大牌领尖角灰色修身显瘦女装马甲两件套套装 女AW9639 灰色 M",
+                      "url": "http://item.jd.com/1534292215.html",
+                      "gender": "1",
+                      "price": 138.0,
+                      "thumbnail": "thumbnail/f/15/553902feN6c9cc2b2.jpg",
+                      "score": 1.0254959,
+                      "image": "images/f/15/553902feN6c9cc2b2.jpg"
+                    },
+                    {
+                      "uuid": 647284,
+                      "title": "卡羅梵都 2015韩版老虎头印花 网纱拼接 透视两件套背心 T恤 连衣裙 女 T009 黑色 M",
+                      "url": "http://item.jd.com/1492985263.html",
+                      "gender": "1",
+                      "price": 99.0,
+                      "thumbnail": "thumbnail/f/12/552c6fbcN63a74f8a.jpg",
+                      "score": 1.0264847,
+                      "image": "images/f/12/552c6fbcN63a74f8a.jpg"
+                    },
+                    {
+                      "uuid": 636982,
+                      "title": "翰崇 2015夏季新款女装上衣 韩版显瘦大码宽松短袖t恤长款女 宝蓝色 均码 M",
+                      "url": "http://item.jd.com/1509287634.html",
+                      "gender": "1",
+                      "price": 79.0,
+                      "thumbnail": "thumbnail/f/12/5541b30bN1178881e.jpg",
+                      "score": 1.0288398,
+                      "image": "images/f/12/5541b30bN1178881e.jpg"
+                    },
+                    {
+                      "uuid": 52990,
+                      "title": "诗喜贝贝2014秋冬新款韩版时尚毛呢大码上衣甜美蕾丝刺绣下摆连衣裙G552C1261 宝蓝 M",
+                      "url": "http://item.jd.com/1288711774.html",
+                      "gender": "1",
+                      "price": 149.0,
+                      "thumbnail": "thumbnail/f/01/54091e99N1353f9ba.jpg",
+                      "score": 1.0311694,
+                      "image": "images/f/01/54091e99N1353f9ba.jpg"
+                    }
+                  ],
+                  "sResult": {
+                    "count": 0,
+                    "category": 19,
+                    "right": 570,
+                    "categoryStr": "连衣裙",
+                    "bottom": 734,
+                    "top": 0,
+                    "texture": 3,
+                    "maleProb": 0.015813353,
+                    "textureStr": "一致色",
+                    "left": 244
+                  },
+                  "result": "success",
+                  "file_size": 731
+                }
+              ]
+            }
