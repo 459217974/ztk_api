@@ -153,7 +153,7 @@ class KalavaHandler(tornado.web.RequestHandler):
 
     def format_res(self, res, imglink):
         if res['errno'] != 0:
-            self.write(json.dumps({'status': res['errno'], 'errmsg': res}))
+            return {'status': res['errno'], 'errmsg': res}
         format_res = push_img(imglink)
         format_res['match'] = []
         for detect in res['data']['detect']:
