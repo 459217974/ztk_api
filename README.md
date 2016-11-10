@@ -910,12 +910,7 @@
 		      "tfsid": "TB1IOGSOXXXXXXEXVXXXXXXXXXX", // 淘宝在第一次上传图片后，就将图片链接转为自己的图片链接，如果需要重新框选，需要使用这个淘宝的图片id
 		      "match": [ //为适用我们的接口返回多个匹配结果的情况，这是一个匹配结果的数组
 		        {
-		          "box": {
-		            "y": "542",
-		            "x": "187",
-		            "w": "14",
-		            "h": "586"
-		          },
+		          "box": {"y": 0.0175, "x": 0.23375, "w": 0.44375, "h": 0.715},
 		          "good_list": [ // 匹配商品的列表
 		            {
 		              "showimage": "http://g-search3.alicdn.com/img/bao/uploaded/i4/TB2mdoNXR_xQeBjy0FhXXbAoFXa_!!2860759430.png",
